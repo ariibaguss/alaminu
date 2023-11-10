@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_home"
+        android:icon="@drawable/baseline_home_24"
+        android:title="@string/title_home" />
+
+    <item
+        android:id="@+id/navigation_modul"
+        android:icon="@drawable/baseline_view_module_24"
+        android:title="@string/title_modul" />
+
+    <item
+        android:id="@+id/navigation_absen"
+        android:icon="@drawable/baseline_file_present_24"
+        android:title="@string/title_absen" />
+
+    <item
+        android:id="@+id/navigation_jadwal"
+        android:icon="@drawable/baseline_schedule_24"
+        android:title="@string/title_jadwal" />
+
+    <item
+        android:id="@+id/navigation_notifikasi"
+        android:icon="@drawable/baseline_notifications_24"
+        android:title="@string/title_notifikasi" />
+
+</menu>

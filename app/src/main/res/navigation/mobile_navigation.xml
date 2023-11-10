@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_home">
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="com.example.alaminu.ui.home.HomeFragment"
+        android:label="@string/title_home"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/navigation_modul"
+        android:name="com.example.alaminu.ui.modul.ModulFragment"
+        android:label="@string/title_modul"
+        tools:layout="@layout/fragment_modul" />
+
+    <fragment
+        android:id="@+id/navigation_absen"
+        android:name="com.example.alaminu.ui.absen.AbsenFragment"
+        android:label="@string/title_absen"
+        tools:layout="@layout/fragment_absen" />
+
+    <fragment
+        android:id="@+id/navigation_jadwal"
+        android:name="com.example.alaminu.ui.jadwal.JadwalFragment"
+        android:label="@string/title_jadwal"
+        tools:layout="@layout/fragment_jadwal" />
+
+    <fragment
+        android:id="@+id/navigation_notifikasi"
+        android:name="com.example.alaminu.ui.notif.NotifFragment"
+        android:label="@string/title_notifikasi"
+        tools:layout="@layout/fragment_notif" />
+
+</navigation>

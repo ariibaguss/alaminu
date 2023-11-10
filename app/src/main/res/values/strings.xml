@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">alaminu</string>
+    <string name="title_absen">Absen</string>
+    <string name="title_home">Home</string>
+    <string name="title_jadwal">Jadwal</string>
+    <string name="title_notifikasi">Notifikasi</string>
+    <string name="title_modul">Modul</string>
 </resources>
