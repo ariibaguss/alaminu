@@ -1,14 +1,16 @@
 package com.example.alaminu
 
 import android.os.Bundle
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
-import androidx.navigation.ui.setupWithNavController
-import com.example.alaminu.R
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import com.example.alaminu.databinding.ActivityMainBinding
+import com.example.alaminu.ui.absen.AbsenFragment
+import com.example.alaminu.ui.home.HomeFragment
+import com.example.alaminu.ui.modul.ModulFragment
+import com.example.alaminu.ui.jadwal.JadwalFragment
+import com.example.alaminu.ui.notif.NotifFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -16,21 +18,30 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        supportActionBar?.hide()
 
-        val navView: BottomNavigationView = binding.navView
+        replaceFragment(HomeFragment())
+        binding.bottomNavigationView.background = null
+        binding.bottomNavigationView.setOnItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.navigation_home -> replaceFragment(HomeFragment())
+                R.id.navigation_modul -> replaceFragment(ModulFragment())
+                R.id.navigation_jadwal -> replaceFragment(JadwalFragment())
+                R.id.navigation_notifikasi -> replaceFragment(NotifFragment())
+            }
+            true
+        }
+        binding.btnabsen.setOnClickListener() {
+            replaceFragment(AbsenFragment())
+        }
+    }
 
-        val navController = findNavController(R.id.nav_host_fragment_activity_main)
-
-        val appBarConfiguration = AppBarConfiguration(
-            setOf(
-                R.id.navigation_home, R.id.navigation_modul, R.id.navigation_absen, R.id.navigation_jadwal,
-                R.id.navigation_notifikasi
-            )
-        )
-        setupActionBarWithNavController(navController, appBarConfiguration)
-        navView.setupWithNavController(navController)
+    private fun replaceFragment(fragment: Fragment) {
+        val fragmentManager: FragmentManager = supportFragmentManager
+        val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.frame_layout, fragment)
+        fragmentTransaction.commit()
     }
 }

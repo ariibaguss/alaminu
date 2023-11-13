@@ -5,4 +5,10 @@
     <string name="title_jadwal">Jadwal</string>
     <string name="title_notifikasi">Notifikasi</string>
     <string name="title_modul">Modul</string>
+
+    /Headings
+    <string name="heading_one">Start Learning New Skills</string>
+    <string name="heading_two">Improve your manajement</string>
+    <string name="heading_three">Start Learning New Skills</string>
+
 </resources>

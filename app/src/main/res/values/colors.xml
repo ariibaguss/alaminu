@@ -9,4 +9,10 @@
     <color name="white">#FFFFFFFF</color>
     <color name="biru">#3396FE</color>
     <color name="abu_abu">#5C5A5A</color>
+    <color name="background">#F5F5F5</color>
+    <color name="main">#E8EDF3</color>
+
+    //indicator color
+    <color name="inactive">#C4C4C4</color>
+    <color name="active">#3396FE</color>
 </resources>

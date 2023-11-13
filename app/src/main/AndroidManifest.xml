@@ -16,7 +16,7 @@
             android:name=".SplashScreen"
             android:exported="true"
             android:label="@string/app_name"
-            android:theme="@style/Theme.alaminu">
+            android:theme="@style/SplashScreenTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -24,9 +24,14 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".ui.slider.Onboarding"
+            android:exported="true"
+            android:theme="@style/Introduction">
+        </activity>
+        <activity
             android:name=".MainActivity"
             android:exported="true"
-            android:theme="@style/Theme.alaminu">
+            android:theme="@style/Introduction">
         </activity>
         <activity
             android:name=".LoginActivity"

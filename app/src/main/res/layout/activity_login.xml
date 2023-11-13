@@ -19,15 +19,32 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <Button
+        style="@style/Widget.Material3.Button.OutlinedButton"
+        android:id="@+id/btngoogle"
+        android:layout_width="300dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="595dp"
+        android:fontFamily="@font/poppins_bold"
+        android:text="MASUK DENGAN GOOGLE"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        android:textAlignment="center"
+        android:backgroundTint="@color/main"
+        app:strokeColor="@color/main"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/or"
-        android:layout_width="310dp"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="200dp"
         android:fontFamily="@font/poppins_regular"
         android:textAlignment="center"
         android:text="Silakan masukkan informasi Anda di bawah ini untuk masuk ke akun Anda"
-        android:textColor="@color/black"
+        android:textColor="@color/abu_abu"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/login"
@@ -36,11 +53,12 @@
 
     <TextView
         android:id="@+id/atau"
-        android:layout_width="279dp"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="540dp"
+        android:textAlignment="center"
         android:fontFamily="@font/poppins_regular"
-        android:text="Gunakan akun media sosial untuk login"
+        android:text="------------ Atau ------------"
         android:textColor="@color/black"
         android:textSize="14sp"
         app:layout_constraintTop_toBottomOf="@id/btnmasuk"
@@ -128,7 +146,7 @@
         android:layout_height="24dp"
         app:srcCompat="@drawable/emil"
         android:layout_marginStart="13dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="11dp"
         app:layout_constraintStart_toStartOf="@id/email"
         app:layout_constraintBottom_toBottomOf="@id/email"
         tools:layout_editor_absoluteX="66dp"
@@ -140,11 +158,23 @@
         android:layout_height="24dp"
         app:srcCompat="@drawable/key"
         android:layout_marginStart="13dp"
-        android:layout_marginBottom="9dp"
+        android:layout_marginBottom="11dp"
         app:layout_constraintStart_toStartOf="@id/pass"
         app:layout_constraintBottom_toBottomOf="@id/pass"
         tools:layout_editor_absoluteX="66dp"
         tools:layout_editor_absoluteY="312dp" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="13dp"
+        android:layout_marginBottom="12dp"
+        app:srcCompat="@drawable/gugel"
+        app:layout_constraintStart_toStartOf="@id/btngoogle"
+        app:layout_constraintBottom_toBottomOf="@id/btngoogle"
+        tools:layout_editor_absoluteX="79dp"
+        tools:layout_editor_absoluteY="553dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
