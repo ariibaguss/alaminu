@@ -38,7 +38,8 @@ class HomeFragment : Fragment() {
 
         recyclerView.layoutManager = LinearLayoutManager(root.context, LinearLayoutManager.HORIZONTAL, false)
         recyclerView2.layoutManager = LinearLayoutManager(root.context, LinearLayoutManager.HORIZONTAL, false)
-        recyclerView3.layoutManager = LinearLayoutManager(root.context, LinearLayoutManager.HORIZONTAL, true)
+        recyclerView3.layoutManager = LinearLayoutManager(root.context, LinearLayoutManager.VERTICAL, false)
+
         recyclerView.adapter = adapter
         recyclerView2.adapter = adapter2
         recyclerView3.adapter = adapter3

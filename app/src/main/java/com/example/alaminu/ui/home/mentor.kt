@@ -18,7 +18,7 @@ class mentor: RecyclerView.Adapter<mentor.MyViewHolder>() {
     }
 
     override fun getItemCount(): Int {
-        return 6
+        return 5
     }
 
     class MyViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
