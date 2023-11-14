@@ -1,4 +1,4 @@
-package com.example.alaminu.ui.home
+package com.example.alaminu.ui.home.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,10 +6,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.alaminu.R
 
-class Horizontal_RecyclerView: RecyclerView.Adapter<Horizontal_RecyclerView.MyViewHolder>() {
+class mentor: RecyclerView.Adapter<mentor.MyViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.row, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_mentor, parent, false)
         return MyViewHolder(view)
     }
 

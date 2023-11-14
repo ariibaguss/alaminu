@@ -9,12 +9,15 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.alaminu.R
 import com.example.alaminu.databinding.FragmentHomeBinding
+import com.example.alaminu.ui.home.adapter.aktivitas
+import com.example.alaminu.ui.home.adapter.mapel
+import com.example.alaminu.ui.home.adapter.mentor
 
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
-    private lateinit var adapter: Horizontal_RecyclerView
+    private lateinit var adapter: mapel
     private lateinit var adapter2: mentor
     private lateinit var adapter3: aktivitas
     private lateinit var recyclerView: RecyclerView
@@ -32,7 +35,7 @@ class HomeFragment : Fragment() {
         recyclerView = root.findViewById(R.id.recyclerView)
         recyclerView2 = root.findViewById(R.id.mentor)
         recyclerView3 = root.findViewById(R.id.aktivitas)
-        adapter = Horizontal_RecyclerView()
+        adapter = mapel()
         adapter2 = mentor()
         adapter3 = aktivitas()
 

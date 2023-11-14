@@ -1,4 +1,4 @@
-package com.example.alaminu.ui.home
+package com.example.alaminu.ui.home.adapter
 
 import android.view.LayoutInflater
 import android.view.View
