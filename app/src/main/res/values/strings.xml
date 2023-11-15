@@ -10,9 +10,6 @@
     <string name="heading_one">Start Learning New Skills</string>
     <string name="heading_two">Improve your manajement</string>
     <string name="heading_three">Start Learning New Skills</string>
-
-    <string name="login_success">Login Berhasil</string>
-    <string name="login_failed">Login Gagal</string>
-    <string name="invalid_credentials">Password atau Username Salah</string>
+    <dimen name="outline_width">10dp</dimen>
 
 </resources>

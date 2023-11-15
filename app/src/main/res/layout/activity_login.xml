@@ -82,7 +82,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/username"
+        android:id="@+id/email"
         android:layout_width="300dp"
         android:layout_height="45dp"
         android:layout_marginTop="280dp"
@@ -90,8 +90,8 @@
         android:background="@drawable/edit_text"
         android:fontFamily="@font/poppins_italic"
         android:gravity="center_vertical|left"
-        android:hint="Username"
-        android:inputType="text"
+        android:hint="Email"
+        android:inputType="textEmailAddress"
         android:padding="8dp"
         android:textColor="@color/black"
         android:textColorHint="@color/abu_abu"
@@ -121,7 +121,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/username"
+        app:layout_constraintTop_toBottomOf="@id/email"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -147,8 +147,8 @@
         app:srcCompat="@drawable/emil"
         android:layout_marginStart="13dp"
         android:layout_marginBottom="11dp"
-        app:layout_constraintStart_toStartOf="@id/username"
-        app:layout_constraintBottom_toBottomOf="@id/username"
+        app:layout_constraintStart_toStartOf="@id/email"
+        app:layout_constraintBottom_toBottomOf="@id/email"
         tools:layout_editor_absoluteX="66dp"
         tools:layout_editor_absoluteY="312dp" />
 
