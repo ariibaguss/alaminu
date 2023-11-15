@@ -5,4 +5,28 @@
     android:layout_height="90dp"
     android:layout_margin="10dp">
 
+    <TextView
+        android:id="@+id/mentor"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="34dp"
+        android:layout_gravity="center"
+        android:fontFamily="@font/poppins_bold"
+        android:textAlignment="center"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+    </TextView>
+
+    <ImageView
+        android:id="@+id/image"
+        android:layout_width="67dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="6dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintTop_toBottomOf="@+id/mapel" />
+
 </androidx.cardview.widget.CardView>

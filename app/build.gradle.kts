@@ -57,6 +57,7 @@ dependencies {
     implementation("com.github.bumptech.glide:glide:4.15.0")
     implementation("com.loopj.android:android-async-http:1.4.9")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9")
+    implementation("com.squareup.picasso:picasso:2.71828")
 
     //retrofit
     implementation("com.google.code.gson:gson:2.8.9")
