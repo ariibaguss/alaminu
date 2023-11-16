@@ -36,7 +36,7 @@ class Mapel : RecyclerView.Adapter<Mapel.MyViewHolder>() {
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         // Add a bind function to bind data to views
         fun bind(mapel: Map<String, String>) {
-            val textView: TextView = itemView.findViewById(R.id.mapel)
+            val textView: TextView = itemView.findViewById(R.id.nama)
             val imageView: ImageView = itemView.findViewById(R.id.image)
 
             // Set the text from MapelModel to the TextView

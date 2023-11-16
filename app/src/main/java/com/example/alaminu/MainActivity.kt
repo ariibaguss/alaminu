@@ -1,5 +1,6 @@
 package com.example.alaminu
 
+import ModulFragment
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -8,7 +9,6 @@ import androidx.fragment.app.FragmentTransaction
 import com.example.alaminu.databinding.ActivityMainBinding
 import com.example.alaminu.ui.absen.AbsenFragment
 import com.example.alaminu.ui.home.HomeFragment
-import com.example.alaminu.ui.modul.ModulFragment
 import com.example.alaminu.ui.jadwal.JadwalFragment
 import com.example.alaminu.ui.notif.NotifFragment
 

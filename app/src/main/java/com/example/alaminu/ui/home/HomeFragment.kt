@@ -23,9 +23,11 @@ class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
+
     private lateinit var adapter: Mapel
     private lateinit var adapter2: Mentor
     private lateinit var adapter3: Aktivitas
+
     private lateinit var recyclerView: RecyclerView
     private lateinit var recyclerView2: RecyclerView
     private lateinit var recyclerView3: RecyclerView
@@ -38,9 +40,10 @@ class HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        recyclerView = root.findViewById(R.id.recyclerView)
+        recyclerView = root.findViewById(R.id.mapel)
         recyclerView2 = root.findViewById(R.id.mentor)
         recyclerView3 = root.findViewById(R.id.aktivitas)
+
         adapter = Mapel()
         adapter2 = Mentor()
         adapter3 = Aktivitas()
@@ -57,8 +60,8 @@ class HomeFragment : Fragment() {
         recyclerView3.adapter = adapter3
 
         // Make network requests to retrieve data from different tables or URLs
-        fetchData("${DbContract.urlRecymapel}", adapter)
-        fetchData("${DbContract.urlRecymentor}", adapter2)
+        fetchData(DbContract.urlRecymapel, adapter)
+        fetchData(DbContract.urlRecymentor, adapter2)
 
         return root
     }

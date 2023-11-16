@@ -23,7 +23,7 @@
             app:layout_constraintStart_toStartOf="parent" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
+            android:id="@+id/mapel"
             android:layout_width="match_parent"
             android:layout_height="140dp"
             android:layout_marginTop="10dp"
@@ -39,7 +39,7 @@
             android:src="@drawable/titlementor"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/recyclerView"
+            app:layout_constraintTop_toBottomOf="@+id/mapel"
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.recyclerview.widget.RecyclerView

@@ -6,7 +6,7 @@
     android:layout_margin="10dp">
 
     <TextView
-        android:id="@+id/mentor"
+        android:id="@+id/nama"
         android:layout_width="70dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="34dp"

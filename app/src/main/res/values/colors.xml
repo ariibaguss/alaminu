@@ -11,7 +11,13 @@
     <color name="abu_abu">#5C5A5A</color>
     <color name="background">#F5F5F5</color>
     <color name="main">#E8EDF3</color>
-
+    <color name="kuning">#FFFB73</color>
+    <color name="progress_color">#4CAF50</color>
+    <color name="color10Percent">#FFA500</color>
+    <color name="color20Percent">#FF0000</color>
+    <color name="color30Percent">#00FF00</color>
+    <color name="color100Percent">#ababab</color>
+    <color name="bg">#E8EDF3</color>
     //indicator color
     <color name="inactive">#C4C4C4</color>
     <color name="active">#3396FE</color>
