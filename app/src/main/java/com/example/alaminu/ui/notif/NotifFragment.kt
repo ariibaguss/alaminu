@@ -1,12 +1,14 @@
 package com.example.alaminu.ui.notif
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.alaminu.R
 import com.example.alaminu.databinding.FragmentNotifBinding
 
 class NotifFragment : Fragment() {
@@ -14,22 +16,24 @@ class NotifFragment : Fragment() {
     private var _binding: FragmentNotifBinding? = null
     private val binding get() = _binding!!
 
+    @SuppressLint("MissingInflatedId")
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
+        inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
-        val homeViewModel =
-            ViewModelProvider(this).get(NotifViewModel::class.java)
+    ): View? {
+        val view = inflater.inflate(R.layout.fragment_notif, container, false)
 
-        _binding = FragmentNotifBinding.inflate(inflater, container, false)
-        val root: View = binding.root
+        val notificationList = listOf(
+            Notifications("New Message", "You have a new message"),
+            Notifications("Reminder", "Don't forget your appointment"),
+            // Add more notifications as needed
+        )
 
-        val textView: TextView = binding.textNotifications
-        homeViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
-        return root
+        val recyclerView: RecyclerView = view.findViewById(R.id.recyclerView)
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        recyclerView.adapter = NotificationsAdapter(notificationList)
+
+        return view
     }
 
     override fun onDestroyView() {

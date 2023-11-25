@@ -1,6 +1,6 @@
 package com.example.alaminu
 
-import ModulFragment
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -11,6 +11,9 @@ import com.example.alaminu.ui.absen.AbsenFragment
 import com.example.alaminu.ui.home.HomeFragment
 import com.example.alaminu.ui.jadwal.JadwalFragment
 import com.example.alaminu.ui.notif.NotifFragment
+import com.example.alaminu.ui.modul.ModulFragment
+import com.example.alaminu.ui.profil.ProfilActivity
+import com.example.alaminu.ui.profil.UserData
 
 class MainActivity : AppCompatActivity() {
 
@@ -21,6 +24,16 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         supportActionBar?.hide()
+
+        val userData = intent.getSerializableExtra("userData") as? UserData
+        if (userData != null) {
+            // Start ProfilActivity and pass user data
+            val intent = Intent(applicationContext, ProfilActivity::class.java)
+            intent.putExtra("userData", userData)
+            startActivity(intent)
+        } else {
+            // Handle the case where user data is not available
+        }
 
         replaceFragment(HomeFragment())
         binding.bottomNavigationView.background = null

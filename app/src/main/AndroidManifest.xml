@@ -41,6 +41,11 @@
             android:exported="true"
             android:theme="@style/SplashScreenTheme">
         </activity>
+        <activity
+            android:name=".ui.profil.ProfilActivity"
+            android:exported="true"
+            android:theme="@style/Introduction">
+        </activity>
     </application>
 
 </manifest>

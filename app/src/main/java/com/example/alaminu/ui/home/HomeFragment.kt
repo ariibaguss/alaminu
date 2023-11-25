@@ -1,9 +1,12 @@
 package com.example.alaminu.ui.home
 
+import android.content.Intent
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.util.Base64
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -17,6 +20,7 @@ import com.example.alaminu.databinding.FragmentHomeBinding
 import com.example.alaminu.ui.home.adapter.aktivitas.Aktivitas
 import com.example.alaminu.ui.home.adapter.mapel.Mapel
 import com.example.alaminu.ui.home.adapter.mentor.Mentor
+import com.example.alaminu.ui.profil.ProfilActivity
 import org.json.JSONArray
 
 class HomeFragment : Fragment() {
@@ -63,12 +67,22 @@ class HomeFragment : Fragment() {
         fetchData(DbContract.urlRecymapel, adapter)
         fetchData(DbContract.urlRecymentor, adapter2)
 
+        binding.profileButton.setOnClickListener {
+            val intent = Intent(requireContext(), ProfilActivity::class.java)
+            startActivity(intent)
+            requireActivity().overridePendingTransition(0, 0)
+        }
         return root
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun onResume() {
+        super.onResume()
+        requireActivity().overridePendingTransition(0, 0)
     }
 
     private fun fetchData(url: String, adapter: RecyclerView.Adapter<*>) {
@@ -104,7 +118,7 @@ class HomeFragment : Fragment() {
 
         for (i in 0 until jsonArray.length()) {
             val jsonObject = jsonArray.getJSONObject(i)
-            // Assuming your JSON structure has keys "nama_mapel" and "path_gambar"
+            // Assuming your JSON structure has keys "nama_mapel" and "image_blob"
             val mapel = mapOf(
                 "nama" to jsonObject.getString("nama"),
                 "image" to jsonObject.getString("image")

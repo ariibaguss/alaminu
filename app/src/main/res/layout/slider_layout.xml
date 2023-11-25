@@ -9,9 +9,9 @@
 
     <ImageView
         android:id="@+id/titleImage"
-        android:layout_width="231dp"
-        android:layout_height="267dp"
-        android:layout_marginTop="30dp"
+        android:layout_width="201dp"
+        android:layout_height="237dp"
+        android:layout_marginTop="20dp"
         android:layout_gravity="center"
         android:src="@drawable/m1"/>
 
@@ -19,12 +19,27 @@
         android:id="@+id/texttitle"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="30dp"
         android:fontFamily="@font/poppins_bold"
         android:layout_gravity="center"
         android:text="@string/app_name"
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="16dp"/>
+
+    <TextView
+        android:id="@+id/desc"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/poppins_regular"
+        android:layout_gravity="center"
+        android:textAlignment="center"
+        android:text="@string/mulai"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="@+id/texttitle"
+        app:layout_constraintStart_toStartOf="@+id/texttitle"
+        app:layout_constraintTop_toBottomOf="@+id/texttitle" />
 
 </LinearLayout>

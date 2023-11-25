@@ -3,7 +3,6 @@ package com.example.alaminu
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.android.volley.Request
@@ -11,15 +10,19 @@ import com.android.volley.RequestQueue
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.example.alaminu.databinding.ActivityLoginBinding
+import com.example.alaminu.ui.profil.UserData
+import com.google.gson.Gson
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
+import org.json.JSONException
+import org.json.JSONObject
 
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
-    private val etUsername: EditText by lazy { binding.username }
-    private val etPassword: EditText by lazy { binding.pass }
+    private val userPreferences by lazy { UserPreferences(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,8 +31,8 @@ class LoginActivity : AppCompatActivity() {
         supportActionBar?.hide()
 
         binding.btnmasuk.setOnClickListener {
-            val username = etUsername.text.toString()
-            val password = etPassword.text.toString()
+            val username = binding.userEditText.text.toString()
+            val password = binding.passEditText.text.toString()
 
             if (!(username.isEmpty() || password.isEmpty())) {
                 loginUser(username, password)
@@ -48,13 +51,34 @@ class LoginActivity : AppCompatActivity() {
                 "${DbContract.urlLogin}?username=$username&password=$password",
                 { response ->
                     Log.d("LoginActivity", "Respon Server: $response")
-                    if (response == "Selamat datang") {
-                        Log.d("LoginActivity", "Login Berhasil")
-                        Toast.makeText(applicationContext, R.string.login_success, Toast.LENGTH_SHORT).show()
-                        startActivity(Intent(applicationContext, MainActivity::class.java))
-                    } else {
-                        Log.d("LoginActivity", "Login Gagal")
-                        Toast.makeText(applicationContext, R.string.login_failed, Toast.LENGTH_SHORT).show()
+
+                    try {
+                        val jsonResponse = JSONObject(response)
+                        val status = jsonResponse.getString("status")
+                        val message = jsonResponse.getString("message")
+
+                        if (status == "success") {
+                            Log.d("LoginActivity", "Login Berhasil")
+
+                            val userDataJson = jsonResponse.getJSONObject("data")
+                            val userData = Gson().fromJson(userDataJson.toString(), UserData::class.java)
+
+                            MainScope().launch {
+                                userPreferences.saveUsername(username)
+                                userPreferences.savePassword(password)
+
+                                userPreferences.saveUserData(userData)
+                            }
+
+                            Toast.makeText(applicationContext, R.string.login_success, Toast.LENGTH_SHORT).show()
+                            startActivity(Intent(applicationContext, MainActivity::class.java))
+                        } else {
+                            Log.d("LoginActivity", "Login Gagal: $message")
+                            Toast.makeText(applicationContext, message, Toast.LENGTH_SHORT).show()
+                        }
+                    } catch (e: JSONException) {
+                        Log.e("LoginActivity", "Kesalahan parsing JSON: ${e.message}")
+                        Toast.makeText(applicationContext, "Kesalahan parsing JSON", Toast.LENGTH_SHORT).show()
                     }
                 },
                 { error ->

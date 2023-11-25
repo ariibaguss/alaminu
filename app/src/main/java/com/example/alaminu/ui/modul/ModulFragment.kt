@@ -1,15 +1,14 @@
+package com.example.alaminu.ui.modul
+
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.alaminu.databinding.FragmentModulBinding
 import com.google.android.material.tabs.TabLayout
 import androidx.viewpager2.widget.ViewPager2
 import com.example.alaminu.R
-import com.example.alaminu.ui.modul.LatihanFragment
-import com.example.alaminu.ui.modul.MateriFragment
-import com.example.alaminu.ui.modul.SemuaFragment
+import com.example.alaminu.databinding.FragmentModulBinding
 import com.google.android.material.tabs.TabLayoutMediator
 
 class ModulFragment : Fragment() {

@@ -1,5 +1,7 @@
 package com.example.alaminu.ui.home.adapter.mentor
 
+import android.graphics.BitmapFactory
+import android.util.Base64
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -43,12 +45,14 @@ class Mentor: RecyclerView.Adapter<Mentor.MyViewHolder>() {
             textView.text = mapel["nama"]
 
             // Load the image using Picasso into the ImageView if the path is not empty
-            val imagePath = mapel["image"]
-            if (!imagePath.isNullOrBlank()) {
-                Picasso.get().load(imagePath).into(imageView)
+            val imageBase64 = mapel["image"]
+            if (!imageBase64.isNullOrBlank()) {
+                val imageBytes = Base64.decode(imageBase64, Base64.DEFAULT)
+                val decodedImage = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
+                imageView.setImageBitmap(decodedImage)
             } else {
-                // Handle the case where the path is empty or null, for example, set a placeholder image
-                imageView.setImageResource(R.drawable.mentora)
+                // Handle the case where the base64-encoded string is empty or null, for example, set a placeholder image
+                imageView.setImageResource(R.drawable.mentorku)
             }
         }
     }

@@ -1,11 +1,17 @@
-<?xml version="1.0" encoding="utf-8"?>
-<shape xmlns:android="http://schemas.android.com/apk/res/android"
-        android:shape="rectangle">
 
-    <stroke
-        android:width="1dp"
-        android:color="@color/black"/>
-
-    <corners
-        android:radius="8dp"/>
-</shape>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_pressed="true">
+        <shape>
+            <solid android:color="@color/biru" /> <!-- Set the pressed color -->
+            <corners android:radius="8dp" /> <!-- Set the radius to control the roundness -->
+            <stroke android:color="@android:color/darker_gray" android:width="1dp" /> <!-- Set the border color and width if needed -->
+        </shape>
+    </item>
+    <item>
+        <shape>
+            <solid android:color="@android:color/white" />
+            <corners android:radius="8dp" />
+            <stroke android:color="@android:color/darker_gray" android:width="1dp" />
+        </shape>
+    </item>
+</selector>

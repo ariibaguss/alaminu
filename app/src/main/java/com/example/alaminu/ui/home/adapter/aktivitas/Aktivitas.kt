@@ -18,7 +18,7 @@ class Aktivitas: RecyclerView.Adapter<Aktivitas.MyViewHolder>() {
     }
 
     override fun getItemCount(): Int {
-        return 6
+        return 4
     }
 
     class MyViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {

@@ -1,4 +1,6 @@
 package com.example.alaminu.ui.jadwal
+
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -24,6 +26,7 @@ class ScheduleFragment : Fragment() {
             // Lakukan sesuatu dengan tanggal yang dipilih
             val selectedDate = "$dayOfMonth/${month + 1}/$year"
             Toast.makeText(requireActivity(), "Tanggal dipilih: $selectedDate", Toast.LENGTH_SHORT).show()
+
         }
 
         return rootView

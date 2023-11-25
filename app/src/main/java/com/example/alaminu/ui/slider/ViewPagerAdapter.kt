@@ -24,6 +24,12 @@ class ViewPagerAdapter(private val context: Context) : PagerAdapter() {
         R.string.heading_three,
     )
 
+    private val desc = intArrayOf(
+        R.string.welcome,
+        R.string.join,
+        R.string.mulai,
+    )
+
     override fun getCount(): Int {
         return headings.size
     }
@@ -39,9 +45,11 @@ class ViewPagerAdapter(private val context: Context) : PagerAdapter() {
 
         val slideTitleImage: ImageView = view.findViewById(R.id.titleImage)
         val slideHeading: TextView = view.findViewById(R.id.texttitle)
+        val slideDesc: TextView = view.findViewById(R.id.desc)
 
         slideTitleImage.setImageResource(images[position])
         slideHeading.setText(headings[position])
+        slideDesc.setText(desc[position])
 
         container.addView(view)
 

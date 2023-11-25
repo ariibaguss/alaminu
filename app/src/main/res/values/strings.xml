@@ -5,13 +5,19 @@
     <string name="title_jadwal">Jadwal</string>
     <string name="title_notifikasi">Notifikasi</string>
     <string name="title_modul">Modul</string>
+    <string name="title_profil">Profil</string>
 
     /Headings
-    <string name="heading_one">Start Learning New Skills</string>
-    <string name="heading_two">Improve your manajement</string>
-    <string name="heading_three">Start Learning New Skills</string>
-    <dimen name="outline_width">10dp</dimen>
+    <string name="heading_one">Selamat Datang di Bimbel Al-Amin!</string>
+    <string name="heading_two">Eksplorasi Serunya Belajar di Bimbel Al-Amin</string>
+    <string name="heading_three"> Pembelajaran Optimal dengan Kesenangan</string>
 
+    //desc
+    <string name="welcome">Selamat datang di Bimbel Al-Amin! Temukan pengalaman pembelajaran inspiratif bersama kami.</string>
+    <string name="join">Jelajahi perjalanan belajar yang menarik di Bimbel Al-Amin, membantu Anda mencapai prestasi terbaik.</string>
+    <string name="mulai">Bimbel Al-Amin hadir untuk pengalaman belajar efektif dan menyenangkan. Raih kesuksesan dengan bimbingan terbaik dari kami.</string>
+
+    <dimen name="outline_width">10dp</dimen>
     <string name="login_success">Login Berhasil</string>
     <string name="login_failed">Login Gagal</string>
     <string name="invalid_credentials">Password atau Username Salah</string>
