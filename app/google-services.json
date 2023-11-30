@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "471000884135",
+    "project_id": "alaminu-5fe51",
+    "storage_bucket": "alaminu-5fe51.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:471000884135:android:ddd2a1d5915e9e141a0c82",
+        "android_client_info": {
+          "package_name": "com.example.alaminu"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBXbVh-8YJ4RP07lImLZUnK0_sloUIQySQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.profil.ProfilActivity"
-    android:background="@color/background"
+    android:background="@color/white"
     android:id="@+id/profil">
 
     <ImageView
@@ -19,13 +19,25 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <ImageView
+        android:id="@+id/profile"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="30dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:src="@drawable/profile_icon"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imageView6" />
+
     <!-- EditUsername -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/usernameInputLayout"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
-        app:boxBackgroundColor="@color/background"
-        android:layout_marginTop="180dp"
+        app:boxBackgroundColor="@color/white"
+        android:layout_marginTop="160dp"
         app:startIconDrawable="@drawable/name"
         app:layout_constraintTop_toBottomOf="@id/imageView6"
         app:layout_constraintStart_toStartOf="parent"
@@ -48,8 +60,9 @@
         android:id="@+id/emailInputLayout"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        app:boxBackgroundColor="@color/background"
+        android:layout_marginTop="10dp"
+        app:startIconDrawable="@drawable/mail"
+        app:boxBackgroundColor="@color/white"
         app:layout_constraintTop_toBottomOf="@id/usernameInputLayout"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
@@ -71,8 +84,9 @@
         android:id="@+id/nowaInputLayout"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        app:boxBackgroundColor="@color/background"
+        android:layout_marginTop="10dp"
+        app:startIconDrawable="@drawable/phone"
+        app:boxBackgroundColor="@color/white"
         app:layout_constraintTop_toBottomOf="@id/emailInputLayout"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
@@ -93,8 +107,9 @@
         android:id="@+id/jkInputLayout"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        app:boxBackgroundColor="@color/background"
+        android:layout_marginTop="10dp"
+        app:startIconDrawable="@drawable/address"
+        app:boxBackgroundColor="@color/white"
         app:layout_constraintTop_toBottomOf="@id/nowaInputLayout"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
@@ -106,9 +121,39 @@
             android:textSize="14sp"
             android:fontFamily="@font/poppins_regular"
             android:inputType="text"
+            android:text="Alamat"
             android:focusable="false"
             android:clickable="false" />
 
     </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/btnbayar"
+        android:layout_width="250dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="65dp"
+        android:fontFamily="@font/poppins_bold"
+        android:background="@drawable/button"
+        android:text="Pembayaran"
+        android:textColor="@color/white"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/jkInputLayout" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnkeluar"
+        style="@android:style/Widget.Button"
+        android:layout_width="250dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/poppins_bold"
+        android:background="@drawable/compat_button"
+        android:text="KELUAR"
+        android:textColor="@color/biru"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnbayar" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

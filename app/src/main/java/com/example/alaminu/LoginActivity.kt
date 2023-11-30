@@ -1,8 +1,12 @@
 package com.example.alaminu
 
 import android.content.Intent
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
+import android.util.Patterns
+import android.widget.EditText
+import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.android.volley.Request
@@ -16,12 +20,15 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
+import androidx.appcompat.app.AlertDialog
+import com.google.firebase.auth.FirebaseAuth
 import org.json.JSONException
 import org.json.JSONObject
 
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
+    private lateinit var firebaseAuth: FirebaseAuth
     private val userPreferences by lazy { UserPreferences(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,6 +37,8 @@ class LoginActivity : AppCompatActivity() {
         setContentView(binding.root)
         supportActionBar?.hide()
 
+        firebaseAuth = FirebaseAuth.getInstance()
+
         binding.btnmasuk.setOnClickListener {
             val username = binding.userEditText.text.toString()
             val password = binding.passEditText.text.toString()
@@ -37,8 +46,28 @@ class LoginActivity : AppCompatActivity() {
             if (!(username.isEmpty() || password.isEmpty())) {
                 loginUser(username, password)
             } else {
-                Toast.makeText(applicationContext, R.string.invalid_credentials, Toast.LENGTH_SHORT).show()
+                Toast.makeText(applicationContext, R.string.invalid_credentials, Toast.LENGTH_SHORT)
+                    .show()
             }
+        }
+
+        binding.lupa.setOnClickListener {
+            val builder = AlertDialog.Builder(this)
+            val view = layoutInflater.inflate(R.layout.dialog_forgot, null)
+            val userEmail = view.findViewById<EditText>(R.id.emailEditText)
+            builder.setView(view)
+            val dialog = builder.create()
+            view.findViewById<Button>(R.id.btnReset).setOnClickListener {
+                compareEmail(userEmail)
+                dialog.dismiss()
+            }
+            view.findViewById<Button>(R.id.btnCancel).setOnClickListener {
+                dialog.dismiss()
+            }
+            if (dialog.window != null) {
+                dialog.window!!.setBackgroundDrawable(ColorDrawable(0))
+            }
+            dialog.show()
         }
     }
 
@@ -88,5 +117,21 @@ class LoginActivity : AppCompatActivity() {
             )
             requestQueue.add(stringRequest)
         }
+    }
+
+    private fun compareEmail(email: EditText){
+        if (email.text.toString().isEmpty()){
+            return
+        }
+        if (!Patterns.EMAIL_ADDRESS.matcher(email.text.toString()).matches()){
+            return
+        }
+
+        firebaseAuth.sendPasswordResetEmail(email.text.toString())
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    Toast.makeText(this, "Check your email", Toast.LENGTH_SHORT).show()
+                }
+            }
     }
 }

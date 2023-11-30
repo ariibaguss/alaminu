@@ -3,7 +3,7 @@ package com.example.alaminu.ui.profil
 import java.io.Serializable
 
 class UserData(
-    val id: String,
+    val id_pengguna: String,
     val username: String,
     val password: String,
     val email: String,

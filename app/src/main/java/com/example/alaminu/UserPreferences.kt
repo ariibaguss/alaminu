@@ -27,7 +27,7 @@ class UserPreferences(context: Context) {
 
     suspend fun saveUserData(userData: UserData) {
         dataStore.edit { preferences ->
-            preferences[USER_ID_KEY] = userData.id
+            preferences[USER_ID_KEY] = userData.id_pengguna
             preferences[USERNAME_KEY] = userData.username
             preferences[EMAIL_KEY] = userData.email
             preferences[NO_WA_KEY] = userData.no_wa
@@ -60,6 +60,10 @@ class UserPreferences(context: Context) {
         preferences[JENIS_KELAMIN_KEY] ?: ""
     }
 
+    suspend fun getUserId(): String {
+        return userIdFlow.first()
+    }
+
     suspend fun getUsername(): String {
         return usernameFlow.first()
     }
@@ -78,6 +82,12 @@ class UserPreferences(context: Context) {
 
     suspend fun getPasssword(): String {
         return passFlow.first()
+    }
+
+    suspend fun clearAllPreferences() {
+        dataStore.edit { preferences ->
+            preferences.clear()
+        }
     }
 
     companion object {

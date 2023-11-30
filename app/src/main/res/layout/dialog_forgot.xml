@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/dialogForgot"
+    android:layout_margin="20dp"
+    android:padding="20dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/dialogBox"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/lavender_border">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/forgotTitle"
+            android:background="@drawable/lavender_fill"
+            android:fontFamily="@font/poppins_bold"
+            android:textAlignment="center"
+            android:padding="10dp"
+            android:text="Lupa Password"
+            android:textColor="@color/white"
+            android:textSize="17sp"
+            android:drawableLeft="@drawable/passput"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/editBox"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/forgotTitle"
+            app:startIconDrawable="@drawable/mail">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/emailEditText"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/poppins_regular"
+                android:hint="Email"
+                android:inputType="text"
+                android:lines="1"
+                android:textSize="14sp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:id="@+id/btnCancel"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="10dp"
+            android:textColor="@color/white"
+            android:fontFamily="@font/poppins_medium"
+            android:textSize="14sp"
+            android:text="Cancel"
+            android:layout_marginBottom="8dp"
+            app:cornerRadius = "10dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintTop_toBottomOf="@id/editBox"
+            app:layout_constraintBottom_toBottomOf="@id/dialogBox"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/btnReset"/>
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:id="@+id/btnReset"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="40dp"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:fontFamily="@font/poppins_medium"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="10dp"
+            android:text="Reset"
+            app:cornerRadius = "10dp"
+            app:layout_constraintBottom_toBottomOf="@id/dialogBox"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/btnCancel"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

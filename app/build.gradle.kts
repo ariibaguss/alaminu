@@ -3,6 +3,7 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("com.google.devtools.ksp")
     id("kotlin-parcelize")
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -87,4 +88,16 @@ dependencies {
 
     // Volley
     implementation("com.android.volley:volley:1.2.1")
+
+    // Camera
+    implementation("androidx.camera:camera-core:1.2.1")
+    implementation("androidx.camera:camera-camera2:1.2.1")
+    implementation("androidx.camera:camera-lifecycle:1.2.1")
+    implementation("androidx.camera:camera-view:1.2.1")
+
+    //firebase
+    implementation(platform("com.google.firebase:firebase-bom:32.4.1"))
+    implementation("com.google.firebase:firebase-analytics-ktx")
+    implementation ("com.google.firebase:firebase-database:20.3.0")
+    implementation("com.google.firebase:firebase-auth:22.3.0")
 }

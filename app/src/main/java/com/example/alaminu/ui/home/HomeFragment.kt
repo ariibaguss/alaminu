@@ -1,12 +1,10 @@
 package com.example.alaminu.ui.home
 
 import android.content.Intent
-import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.util.Base64
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -16,17 +14,21 @@ import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.Volley
 import com.example.alaminu.DbContract
 import com.example.alaminu.R
+import com.example.alaminu.UserPreferences
 import com.example.alaminu.databinding.FragmentHomeBinding
 import com.example.alaminu.ui.home.adapter.aktivitas.Aktivitas
 import com.example.alaminu.ui.home.adapter.mapel.Mapel
 import com.example.alaminu.ui.home.adapter.mentor.Mentor
 import com.example.alaminu.ui.profil.ProfilActivity
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.launch
 import org.json.JSONArray
 
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
+    private val userPreferences by lazy { UserPreferences(requireContext()) }
 
     private lateinit var adapter: Mapel
     private lateinit var adapter2: Mentor
@@ -72,6 +74,12 @@ class HomeFragment : Fragment() {
             startActivity(intent)
             requireActivity().overridePendingTransition(0, 0)
         }
+
+        MainScope().launch {
+            val username = userPreferences.getUsername()
+            binding.username.text = "Hi, $username"
+        }
+
         return root
     }
 
