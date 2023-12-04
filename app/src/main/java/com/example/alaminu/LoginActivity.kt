@@ -4,13 +4,15 @@ import android.content.Intent
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
-import android.util.Patterns
 import android.widget.EditText
 import android.widget.Button
+import android.widget.ProgressBar
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.android.volley.Request
 import com.android.volley.RequestQueue
+import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.example.alaminu.databinding.ActivityLoginBinding
@@ -18,17 +20,14 @@ import com.example.alaminu.ui.profil.UserData
 import com.google.gson.Gson
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
-import androidx.appcompat.app.AlertDialog
-import com.google.firebase.auth.FirebaseAuth
+import kotlinx.coroutines.MainScope
 import org.json.JSONException
 import org.json.JSONObject
 
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
-    private lateinit var firebaseAuth: FirebaseAuth
     private val userPreferences by lazy { UserPreferences(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,8 +36,6 @@ class LoginActivity : AppCompatActivity() {
         setContentView(binding.root)
         supportActionBar?.hide()
 
-        firebaseAuth = FirebaseAuth.getInstance()
-
         binding.btnmasuk.setOnClickListener {
             val username = binding.userEditText.text.toString()
             val password = binding.passEditText.text.toString()
@@ -46,29 +43,79 @@ class LoginActivity : AppCompatActivity() {
             if (!(username.isEmpty() || password.isEmpty())) {
                 loginUser(username, password)
             } else {
-                Toast.makeText(applicationContext, R.string.invalid_credentials, Toast.LENGTH_SHORT)
-                    .show()
+                Toast.makeText(applicationContext, R.string.invalid_credentials, Toast.LENGTH_SHORT).show()
             }
         }
 
         binding.lupa.setOnClickListener {
-            val builder = AlertDialog.Builder(this)
+            showForgotPasswordDialog()
+        }
+    }
+
+    private fun showForgotPasswordDialog() {
+        if (!isFinishing) {
+            val builder = AlertDialog.Builder(this@LoginActivity)
             val view = layoutInflater.inflate(R.layout.dialog_forgot, null)
             val userEmail = view.findViewById<EditText>(R.id.emailEditText)
             builder.setView(view)
             val dialog = builder.create()
+
             view.findViewById<Button>(R.id.btnReset).setOnClickListener {
-                compareEmail(userEmail)
-                dialog.dismiss()
+                resetPassword(userEmail.text.toString(), dialog)
             }
+
             view.findViewById<Button>(R.id.btnCancel).setOnClickListener {
                 dialog.dismiss()
             }
+
             if (dialog.window != null) {
                 dialog.window!!.setBackgroundDrawable(ColorDrawable(0))
             }
-            dialog.show()
+
+            // Pastikan activity belum dihancurkan sebelum menampilkan dialog
+            if (!isFinishing) {
+                dialog.show()
+            }
         }
+    }
+
+    private fun resetPassword(email: String, dialog: AlertDialog) {
+        val queue = Volley.newRequestQueue(applicationContext)
+        val url = "${DbContract.urlLupas}"
+
+        val stringRequest = object : StringRequest(Method.POST, url,
+            Response.Listener<String> { response ->
+                Log.d("LoginActivity", "Server Response: $response")
+
+                // Mencari kata "success" setelah log SMTP
+                if (response.contains("success")) {
+                    Log.d("LoginActivity", "Before starting NewPassword Activity")
+                    runOnUiThread {
+                        try {
+                            val intent = Intent(this@LoginActivity, NewPassword::class.java)
+                            intent.putExtra("email", email)
+                            this@LoginActivity.startActivity(intent)
+                            this@LoginActivity.finish()
+                        } catch (e: Exception) {
+                            e.printStackTrace()
+                        }
+                    }
+                    Log.d("LoginActivity", "After starting NewPassword Activity")
+                } else {
+                    Toast.makeText(applicationContext, response, Toast.LENGTH_SHORT).show()
+                }
+            },
+            Response.ErrorListener { error ->
+                error.printStackTrace()
+                Toast.makeText(applicationContext, "Volley Error: ${error.message}", Toast.LENGTH_SHORT).show()
+            })  {
+            override fun getParams(): Map<String, String> {
+                val params: MutableMap<String, String> = HashMap()
+                params["email"] = email
+                return params
+            }
+        }
+        queue.add(stringRequest)
     }
 
     private fun loginUser(username: String, password: String) {
@@ -79,7 +126,7 @@ class LoginActivity : AppCompatActivity() {
                 Request.Method.GET,
                 "${DbContract.urlLogin}?username=$username&password=$password",
                 { response ->
-                    Log.d("LoginActivity", "Respon Server: $response")
+                    Log.d("LoginActivity", "Server Response: $response")
 
                     try {
                         val jsonResponse = JSONObject(response)
@@ -95,7 +142,6 @@ class LoginActivity : AppCompatActivity() {
                             MainScope().launch {
                                 userPreferences.saveUsername(username)
                                 userPreferences.savePassword(password)
-
                                 userPreferences.saveUserData(userData)
                             }
 
@@ -117,21 +163,5 @@ class LoginActivity : AppCompatActivity() {
             )
             requestQueue.add(stringRequest)
         }
-    }
-
-    private fun compareEmail(email: EditText){
-        if (email.text.toString().isEmpty()){
-            return
-        }
-        if (!Patterns.EMAIL_ADDRESS.matcher(email.text.toString()).matches()){
-            return
-        }
-
-        firebaseAuth.sendPasswordResetEmail(email.text.toString())
-            .addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    Toast.makeText(this, "Check your email", Toast.LENGTH_SHORT).show()
-                }
-            }
     }
 }

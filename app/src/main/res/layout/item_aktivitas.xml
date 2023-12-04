@@ -8,4 +8,13 @@
     app:cardCornerRadius="10dp"
     app:cardElevation="6dp" >
 
+    <ImageView
+        android:id="@+id/imageViewAktivitas"
+        android:layout_width="207dp"
+        android:layout_height="67dp"
+        android:src="@drawable/mtk"
+        android:layout_marginStart="18dp"
+        android:layout_gravity="center_vertical"
+        android:contentDescription="Description for accessibility" />
+
 </androidx.cardview.widget.CardView>

@@ -9,7 +9,14 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.android.volley.Request
+import com.android.volley.RequestQueue
+import com.example.alaminu.ui.home.adapter.mapel.Mapel
+import com.android.volley.toolbox.JsonArrayRequest
+import com.android.volley.toolbox.Volley
+import com.example.alaminu.DbContract
 import com.example.alaminu.R
+import org.json.JSONArray
 
 class SemuaFragment : Fragment() {
 
@@ -17,7 +24,7 @@ class SemuaFragment : Fragment() {
     private lateinit var percentageText: TextView
     private lateinit var incrementButton: Button
     private lateinit var recyclerView: RecyclerView
-    private lateinit var adapter: HorizontalAdapter
+    private lateinit var adapter: Mapel
     private lateinit var textView: TextView
 
     private var currentPercentage = 0f
@@ -27,45 +34,53 @@ class SemuaFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_semua, container, false)
-        textView = view.findViewById<TextView>(R.id.textView2)
-
-        percentageCircleView = view.findViewById(R.id.percentageCircleView)
-        incrementButton = view.findViewById(R.id.incrementButton)
-        percentageText = view.findViewById(R.id.percentageText)
         recyclerView = view.findViewById(R.id.horizontalRecyclerView)
 
-
-        // Set up RecyclerView
-        recyclerView = view.findViewById(R.id.horizontalRecyclerView)
         recyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-
-        // Inisialisasi adapter (ganti dengan adapter Anda)
-        val data = listOf("Item 1", "Item 2", "Item 3") // Gantilah dengan data Anda
-        adapter = HorizontalAdapter(data)
+        adapter = Mapel()
 
         recyclerView.adapter = adapter
-
-        // TODO: Tambahkan adapter untuk RecyclerView sesuai kebutuhan Anda
-
-        incrementButton.setOnClickListener {
-            incrementPercentage(10f)
-            textView.setBackgroundResource(R.drawable.textpressed)
-        }
+        fetchData(DbContract.urlRecymapel, adapter)
 
         return view
     }
 
-    private fun incrementPercentage(incrementValue: Float) {
-        currentPercentage += incrementValue
+    private fun fetchData(url: String, adapter: RecyclerView.Adapter<*>) {
+        val requestQueue: RequestQueue = Volley.newRequestQueue(requireContext())
 
-        if (currentPercentage > 100) {
-            currentPercentage = 100f
+        val jsonArrayRequest = JsonArrayRequest(
+            Request.Method.GET,
+            url,
+            null,
+            { response ->
+                // Parse the JSON array and update your UI with the retrieved data
+                when (adapter) {
+                    is Mapel -> {
+                        val mapels = parseMapels(response)
+                        adapter.setMapels(mapels)
+                    }
+                }
+            },
+            { error ->
+                // Handle errors
+            }
+        )
+        requestQueue.add(jsonArrayRequest)
+    }
+
+    private fun parseMapels(jsonArray: JSONArray): List<Map<String, String>> {
+        val mapels = mutableListOf<Map<String, String>>()
+
+        for (i in 0 until jsonArray.length()) {
+            val jsonObject = jsonArray.getJSONObject(i)
+            // Assuming your JSON structure has keys "nama_mapel" and "image_blob"
+            val mapel = mapOf(
+                "nama" to jsonObject.getString("nama"),
+                "image" to jsonObject.getString("image")
+            )
+            mapels.add(mapel)
         }
 
-        // Update presentase di dalam lingkaran
-        percentageText.text = "${currentPercentage.toInt()}%"
-
-        // Update presentase dan warna pada lingkaran
-        percentageCircleView.setPercentage(currentPercentage)
+        return mapels
     }
 }

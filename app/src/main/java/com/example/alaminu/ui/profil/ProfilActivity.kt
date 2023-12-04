@@ -1,5 +1,6 @@
 package com.example.alaminu.ui.profil
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -9,6 +10,9 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.RadioGroup
 import android.widget.TextView
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -33,6 +37,7 @@ class ProfilActivity : AppCompatActivity() {
     private lateinit var binding: FragmentProfileBinding
     private val userPreferences by lazy { UserPreferences(this) }
     private lateinit var editBoxz: com.google.android.material.textfield.TextInputEditText
+    private lateinit var editBoxy: com.google.android.material.textfield.TextInputEditText
     private lateinit var dialog: AlertDialog
     private lateinit var requestQueue: RequestQueue
 
@@ -120,14 +125,20 @@ class ProfilActivity : AppCompatActivity() {
         return dataList
     }
 
+    @SuppressLint("SetTextI18n")
     private fun showDialog(unpaidIdPembayaran: String, statusValue: String) {
         dialog = AlertDialog.Builder(this).create()
         val view = layoutInflater.inflate(R.layout.dialog_bayar, null)
         dialog.setView(view)  // Use dialog to set the view
 
         val radioGroup = view.findViewById<RadioGroup>(R.id.paymentOptions)
-        val editBox2 = view.findViewById<com.google.android.material.textfield.TextInputLayout>(R.id.editBox2)
-        editBoxz = view.findViewById<com.google.android.material.textfield.TextInputEditText>(R.id.emailEditText)
+        val editBox2 =
+            view.findViewById<com.google.android.material.textfield.TextInputLayout>(R.id.editBox2)
+        editBoxz =
+            view.findViewById<com.google.android.material.textfield.TextInputEditText>(R.id.emailEditText)
+        editBoxy =
+            view.findViewById<com.google.android.material.textfield.TextInputEditText>(R.id.bniEditText)
+        val ivCopy = view.findViewById<ImageView>(R.id.ivCopy)
         val upload = view.findViewById<ImageView>(R.id.upload)
         val btnCancel = view.findViewById<Button>(R.id.btnCancel)
         val btnSelesai = view.findViewById<Button>(R.id.btnSelesai)
@@ -136,6 +147,7 @@ class ProfilActivity : AppCompatActivity() {
         // Inisialisasi awal visibility
         editBox2.visibility = View.GONE
         upload.visibility = View.GONE
+        ivCopy.visibility = View.GONE
 
         // Listener untuk RadioButton pada dialog
         radioGroup.setOnCheckedChangeListener { _, checkedId ->
@@ -143,10 +155,13 @@ class ProfilActivity : AppCompatActivity() {
                 R.id.radioPayOnSpot -> {
                     editBox2.visibility = View.GONE
                     upload.visibility = View.GONE
+                    ivCopy.visibility = View.GONE
                 }
+
                 R.id.radioBankTransfer -> {
                     editBox2.visibility = View.VISIBLE
                     upload.visibility = View.VISIBLE
+                    ivCopy.visibility = View.VISIBLE
                 }
             }
         }
@@ -162,8 +177,10 @@ class ProfilActivity : AppCompatActivity() {
             // Make the HTTP request to insert payment data with the unpaid id_pembayaran
             MainScope().launch {
                 val userId = userPreferences.getUserId() ?: ""
-                val paymentUrl = "${DbContract.urlBayar}?id_pengguna=$userId&id_pembayaran=$unpaidIdPembayaran&nyicil=$enteredNyicil&status_pembayaran=$statusValue"
-                Log.d("PaymentUrl", paymentUrl)
+                val status_pembayaran = "FALSE"
+                val paymentUrl =
+                    "${DbContract.urlBayar}?id_pengguna=$userId&id_pembayaran=$unpaidIdPembayaran&nyicil=$enteredNyicil&konfirmasi_admin=$status_pembayaran"
+                Log.d("RequestURL", "URL: $paymentUrl")
                 val paymentJsonObjectRequest = JsonObjectRequest(
                     Request.Method.GET, paymentUrl, null,
                     { paymentResponse ->
@@ -171,21 +188,33 @@ class ProfilActivity : AppCompatActivity() {
                         if (paymentResponse is JSONObject) {
                             // Handle the JSON object response here
                             Log.d("PaymentResponse", paymentResponse.toString())
+                            Toast.makeText(
+                                applicationContext,
+                                "Pembayaran Berhasil - Menuju Konfirmasi Admin",
+                                Toast.LENGTH_SHORT
+                            ).show()
                         } else {
                             // Handle the case where the response is not a JSON object
-                            Toast.makeText(applicationContext, "Respon tidak valid", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(
+                                applicationContext,
+                                "Respon tidak valid",
+                                Toast.LENGTH_SHORT
+                            ).show()
                         }
                     },
                     { paymentError ->
                         // Handle the error response here
                         paymentError.printStackTrace()
-                        Toast.makeText(applicationContext, "Terjadi kesalahan. Silakan coba lagi nanti.", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            applicationContext,
+                            "Terjadi kesalahana. Silakan coba lagi nanti.",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
                 )
                 requestQueue.add(paymentJsonObjectRequest)
 
             }
-
             dialog.dismiss()
         }
 
@@ -195,8 +224,21 @@ class ProfilActivity : AppCompatActivity() {
 
         // Set the status value in the TextView
         txtRemainingPayment.text = "Rp. $statusValue"
+        editBoxy.setText("143 00 1674952 3")
+
+        ivCopy.setOnClickListener {
+            copyTextToClipboard()
+        }
 
         dialog.show()
+    }
+
+    private fun copyTextToClipboard() {
+        val textToCopy = editBoxy.text.toString()
+
+        val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        val clip = ClipData.newPlainText("text", textToCopy)
+        clipboard.setPrimaryClip(clip)
     }
 
     private fun logout() {

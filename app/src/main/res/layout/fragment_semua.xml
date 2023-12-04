@@ -6,13 +6,11 @@
     android:layout_height="match_parent"
     android:background="@color/bg">
 
-    <!-- RecyclerView -->
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/horizontalRecyclerView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="180dp"
+        android:layout_marginTop="175dp"
         android:orientation="horizontal"
         android:layout_marginStart="10dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
@@ -22,131 +20,15 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:listitem="@layout/item_aktivitas" />
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="315dp"
-        android:layout_height="378dp"
-        android:layout_marginTop="20dp"
-        android:background="@color/white"
+    <ImageView
+        android:id="@+id/titleImage"
+        android:layout_width="319dp"
+        android:layout_height="348dp"
+        android:layout_marginTop="30dp"
+        android:layout_gravity="center"
+        android:src="@drawable/pencapaian"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.447"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/horizontalRecyclerView" />
-
-
-    <FrameLayout
-        android:id="@+id/frameLayout3"
-        android:layout_width="34dp"
-        android:layout_height="246dp"
-        android:layout_marginTop="4dp"
-        app:layout_constraintEnd_toEndOf="@+id/textView3"
-        app:layout_constraintHorizontal_bias="0.167"
-        app:layout_constraintStart_toStartOf="@+id/textView3"
-        app:layout_constraintTop_toBottomOf="@+id/circularOutline">
-
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="23dp"
-            android:layout_height="23dp"
-            android:layout_marginTop="28dp"
-            android:background="@drawable/textlingkaran"
-            android:elevation="2dp" />
-
-        <TextView
-            android:id="@+id/textView6"
-            android:layout_width="5dp"
-            android:layout_height="250dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="8dp"
-            android:background="@color/biru"
-            android:elevation="1dp" />
-
-    </FrameLayout>
-
-    <View
-        android:id="@+id/circularOutline"
-        android:layout_width="68dp"
-        android:layout_height="61dp"
-        android:layout_centerInParent="true"
-        android:background="@color/white"
-        app:layout_constraintBottom_toBottomOf="@+id/percentageCircleView"
-        app:layout_constraintEnd_toEndOf="@+id/frameLayout2"
-        app:layout_constraintHorizontal_bias="0.015"
-        app:layout_constraintStart_toStartOf="@+id/percentageCircleView"
-        app:layout_constraintTop_toTopOf="@+id/percentageCircleView" />
-
-
-    <TextView
-        android:id="@+id/percentageText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="0%"
-        android:textColor="@android:color/black"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="@+id/circularOutline"
-        app:layout_constraintEnd_toEndOf="@+id/circularOutline"
-        app:layout_constraintStart_toStartOf="@+id/percentageCircleView"
-        app:layout_constraintTop_toTopOf="@+id/circularOutline" />
-
-
-    <Button
-        android:id="@+id/incrementButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/circularOutline"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="180dp"
-        android:layout_marginTop="436dp"
-        android:text="Increment"
-        app:layout_constraintStart_toStartOf="@+id/horizontalRecyclerView"
-        app:layout_constraintTop_toTopOf="@+id/horizontalRecyclerView" />
-
-    <FrameLayout
-        android:id="@+id/frameLayout2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
-
-    </FrameLayout>
-
-
-    <com.example.alaminu.ui.modul.PrecentageCircleView
-        android:id="@+id/percentageCircleView"
-        android:layout_width="68dp"
-        android:layout_height="62dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="28dp"
-        app:layout_constraintEnd_toEndOf="@+id/textView3"
-        app:layout_constraintHorizontal_bias="0.118"
-        app:layout_constraintStart_toStartOf="@+id/textView3"
-        app:layout_constraintTop_toTopOf="@+id/textView3" />
-
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
-        android:text="Pencapaian"
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/textView3"
-        app:layout_constraintHorizontal_bias="0.18"
-        app:layout_constraintStart_toEndOf="@+id/circularOutline"
-        app:layout_constraintTop_toTopOf="@+id/textView3" />
-
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
-        android:text="Pertidaksamaan Linear"
-        android:textColor="@color/black"
-        android:fontFamily="@font/poppins_regular"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="@+id/textView3"
-        app:layout_constraintStart_toEndOf="@+id/frameLayout3"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

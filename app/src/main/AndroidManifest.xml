@@ -43,6 +43,11 @@
             android:theme="@style/Theme.alaminu">
         </activity>
         <activity
+            android:name=".NewPassword"
+            android:exported="true"
+            android:theme="@style/Theme.alaminu">
+        </activity>
+        <activity
             android:name=".ui.profil.ProfilActivity"
             android:exported="true"
             android:theme="@style/Introduction">
